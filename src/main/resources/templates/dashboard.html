@@ -368,23 +368,27 @@
 <script src="/styles/build/js/custom.min.js"></script>
 <!--<script src="/styles/build/js/dashboardElements.js"></script>-->
 
-<script>
+<script th:inline="javascript">
   var salesCostsYearly = document.getElementById("yearlySalesCostsChart");
   salesCostsYearly.height = 100;
+  /*<![CDATA[*/
+  var monthlySales = /*[[${monthlySales}]]*/ 0;
+  var monthlyCosts = /*[[${monthlyCosts}]]*/ 0;
+  /*]]>*/
   new Chart(salesCostsYearly, {
     type: 'bar',
     data: {
       labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
       datasets: [{
         label: 'Sales',
-        data: [100, 200, 125, 70, 80, 300, 200, 100, 130, 270, 60, 400],
+        data: monthlySales,
         backgroundColor: '#26B99A',
         borderColor: '#000000',
         borderWidth: 1
       },
         {
           label: 'Costs',
-          data: [60, 80, 150, 90, 90, 200, 150, 120, 140, 200, 100, 230],
+          data: monthlyCosts,
           backgroundColor: '#03586A',
           borderColor: '#000000',
           borderWidth: 1
@@ -408,12 +412,8 @@
 <script th:inline="javascript">
   var salesMonthly = document.getElementById("monthlySalesChart");
   /*<![CDATA[*/
-  var salesValue = /*[[${salesValue}]]*/ 0;
-  var costValue = /*[[${costValue}]]*/ 0;
-  var username = /*[[${username}]]*/ 'dummyUser';
-  console.log(salesValue);
-  console.log(costValue);
-  console.log(username);
+  var actualSalesValue = /*[[${actualSalesValue}]]*/ 0;
+  var budgetedSalesValue = /*[[${budgetedSalesValue}]]*/ 0;
   /*]]>*/
   new Chart(salesMonthly, {
     type: 'bar',
@@ -421,7 +421,7 @@
       labels: ["Actual", "Budgeted"],
       datasets: [{
         label: 'Sales',
-        data: [salesValue, costValue],
+        data: [actualSalesValue, budgetedSalesValue],
         backgroundColor: [
           '#26B99A',
           '#03586A'
@@ -448,17 +448,27 @@
   });
 </script>
 
-<script>
+<script th:inline="javascript">
   var salesVarianceMonthly = document.getElementById("monthlySalesVarianceChart");
+  /*<![CDATA[*/
+  var actualSalesValue = /*[[${actualSalesValue}]]*/ 0;
+  var budgetedSalesValue = /*[[${budgetedSalesValue}]]*/ 0;
+  var backgroundColorcode;
+  if (actualSalesValue >= budgetedSalesValue) {
+    backgroundColorcode = "#26B99A";
+  } else {
+    backgroundColorcode = "#03586A";
+  }
+  /*]]>*/
   new Chart(salesVarianceMonthly, {
     type: 'bar',
     data: {
       labels: ["Variance"],
       datasets: [{
         label: 'Sales',
-        data: [25],
+        data: [actualSalesValue-budgetedSalesValue],
         backgroundColor: [
-          '#26B99A'
+          backgroundColorcode
         ],
         borderColor: [
           '#000000'
@@ -481,15 +491,19 @@
   });
 </script>
 
-<script>
+<script th:inline="javascript">
   var costsMonthly = document.getElementById("monthlyCostsChart");
+  /*<![CDATA[*/
+  var actualCostValue = /*[[${actualCostValue}]]*/ 0;
+  var budgetedCostValue = /*[[${budgetedCostValue}]]*/ 0;
+  /*]]>*/
   new Chart(costsMonthly, {
     type: 'bar',
     data: {
       labels: ["Actual", "Budgeted"],
       datasets: [{
-        label: 'Sales',
-        data: [200, 150],
+        label: 'Costs',
+        data: [actualCostValue, budgetedCostValue],
         backgroundColor: [
           '#26B99A',
           '#03586A'
@@ -516,17 +530,26 @@
   });
 </script>
 
-<script>
+<script th:inline="javascript">
   var costsVarianceMonthly = document.getElementById("monthlyCostsVarianceChart");
+  /*<![CDATA[*/
+  var actualCostValue = /*[[${actualCostValue}]]*/ 0;
+  var budgetedCostValue = /*[[${budgetedCostValue}]]*/ 0;
+  /*]]>*/
+  if (actualCostValue <= budgetedCostValue) {
+    backgroundColorcode = "#26B99A";
+  } else {
+    backgroundColorcode = "#03586A";
+  }
   new Chart(costsVarianceMonthly, {
     type: 'bar',
     data: {
       labels: ["Variance"],
       datasets: [{
-        label: 'Sales',
-        data: [-50],
+        label: 'Costs',
+        data: [actualCostValue-budgetedCostValue],
         backgroundColor: [
-          '#26B99A'
+          backgroundColorcode
         ],
         borderColor: [
           '#000000'
