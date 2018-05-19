@@ -70,8 +70,8 @@ public class LoginController {
         model.addAttribute("budgetedCostValue", 50);
 
         // array of year sales and costs in each individual month
-        int[] monthlySales = new int[] {100, 200, 125, 70, 80, 300, 200, 100, 130, 270, 60, 400};
-        int[] monthlyCosts = new int[] {60, 80, 150, 90, 90, 200, 150, 120, 140, 200, 100, 230};
+        int[] monthlySales = new int[] {100, 200, 125, 70, 80, 300, 200, 100, 130, 270, 0, 0};
+        int[] monthlyCosts = new int[] {60, 80, 150, 90, 90, 200, 150, 120, 140, 200, 0, 0};
         model.addAttribute("monthlySales", monthlySales);
         model.addAttribute("monthlyCosts", monthlyCosts);
         return "dashboard";
