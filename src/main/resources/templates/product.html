@@ -95,7 +95,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Customer Profitability Analysis</h3>
+                        <h3>Product Profitability Analysis</h3>
                     </div>
                 </div>
 
@@ -105,7 +105,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Customer <small>Monthly Sales report</small></h2>
+                                <h2>Product <small>Monthly Sales report</small></h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
@@ -113,19 +113,10 @@
                                     <div class="profile_img">
                                         <div id="crop-avatar">
                                             <!-- Current avatar -->
-                                            <img class="img-responsive avatar-view" src="/images/customer-icon.jpg" alt="Avatar" title="Change the avatar">
+                                            <img class="img-responsive avatar-view" src="/images/product-icon.png" alt="Avatar" title="Change the avatar">
                                         </div>
                                     </div>
-                                    <h3 th:inline="text">[[${customerName}]]</h3>
-
-                                    <ul class="list-unstyled user_data">
-                                        <li th:inline="text"><i class="fa fa-map-marker user-profile-icon"></i> [[${customerAddress}]]
-                                        </li>
-
-                                        <li th:inline="text">
-                                            <i class="fa fa-briefcase user-profile-icon"></i> [[${customerBusiness}]]
-                                        </li>
-                                    </ul>
+                                    <h3 th:inline="text">[[${productName}]]</h3>
 
                                     <br />
 
@@ -138,7 +129,7 @@
 
                                     <div class="profile_title">
                                         <div class="col-md-6">
-                                            <h2>Customer Monthly Sales Report</h2>
+                                            <h2>Product Monthly Sales Report</h2>
                                         </div>
                                         <!--<div class="col-md-6">-->
                                             <!--<div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">-->
@@ -174,38 +165,27 @@
 
                                     <div class="profile_title">
                                         <div class="col-md-6">
-                                            <h2>Customer Activity Report</h2>
+                                            <h2>Product Activity Report</h2>
                                         </div>
                                     </div>
 
                                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                                            <li role="presentation" class="active"><a href="#tab_content1" role="tab" id="customer-product-tab" data-toggle="tab" aria-expanded="false">Customer - Product Relationship</a>
+                                            <li role="presentation" class="active"><a href="#tab_content1" role="tab" id="product-sales-tab" data-toggle="tab" aria-expanded="false">Contribution to Sales</a>
                                             </li>
-                                            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="customer-sales-tab" data-toggle="tab" aria-expanded="false">Contribution to Sales</a>
-                                            </li>
-                                            <li role="presentation" class=""><a href="#tab_content3" role="tab" id="customer-profileNotes-tab" data-toggle="tab" aria-expanded="false">Profile Notes</a>
+                                            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="product-profileNotes-tab" data-toggle="tab" aria-expanded="false">Product Notes</a>
                                             </li>
                                         </ul>
                                         <div id="myTabContent" class="tab-content">
-                                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="customer-product-tab">
-                                                <blockquote class="message" th:inline="text">Customer - Product Sales Breakdown for year [[${currentYear}]]</blockquote>
-                                                <br />
-                                                <!-- start of user-activity-graph -->
-                                                <div>
-                                                    <canvas id="customerProduct"></canvas>
-                                                </div>
-                                                <!-- end of user-activity-graph -->
-                                            </div>
 
-                                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="customer-sales-tab">
+                                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="product-sales-tab">
 
                                                 <!-- start user projects -->
                                                 <table id="monthlyRevenueTable" class="data table table-striped table-bordered">
                                                     <thead>
                                                     <tr>
                                                         <th>Month</th>
-                                                        <th class="hidden-phone">Monthly Customer Revenue (Rs)</th>
+                                                        <th class="hidden-phone">Monthly Product Revenue (Rs)</th>
                                                         <th class="hidden-phone">Monthly Total Revenue (Rs)</th>
                                                         <th>Contribution for Monthly Revenue</th>
                                                     </tr>
@@ -341,10 +321,10 @@
                                                 <!-- end user projects -->
 
                                             </div>
-                                            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="customer-profileNotes-tab">
-                                                <blockquote class="message">Profile Note 1</blockquote>
+                                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="product-profileNotes-tab">
+                                                <blockquote class="message">Product Note 1</blockquote>
                                                 <br />
-                                                <blockquote class="message">Profile Note 2</blockquote>
+                                                <blockquote class="message">Product Note 2</blockquote>
                                                 <br />
                                             </div>
                                         </div>

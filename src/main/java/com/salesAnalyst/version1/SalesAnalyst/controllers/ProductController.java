@@ -10,12 +10,12 @@ import java.util.Calendar;
 
 @Controller
 @SessionAttributes("username")
-public class CustomerController {
+public class ProductController {
 
     @Value("${app.timezone}")
     private String timezone;
 
-    @GetMapping(path="/user/customer") // Map ONLY GET Requests with the path /user/customer
+    @GetMapping(path="/user/product") // Map ONLY GET Requests with the path /user/product
     public String handleCustomerViewDisplay(ModelMap model) {
 
         if (!model.containsAttribute("username")) {
@@ -29,15 +29,13 @@ public class CustomerController {
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
 
         // customer details
-        model.addAttribute("customerName", "TGIF Colombo");
-        model.addAttribute("customerBusiness", "Restaurant Management");
-        model.addAttribute("customerAddress", "555A, Canal Row, Colombo 01");
+        model.addAttribute("productName", "Product A");
 
         // array of monthly sales of the customer
         int[] monthlySales = new int[] {100, 200, 125, 70, 80, 300, 200, 100, 130, 270, 0, 0};
         int[] customerProductSales = new int[] {600, 180, 250, 300, 170, 190};
         model.addAttribute("monthlySales", monthlySales);
         model.addAttribute("customerProductSales", customerProductSales);
-        return "customer";
+        return "product";
     }
 }
