@@ -32,6 +32,7 @@ public class LoginController {
             return "redirect:/login/error";
         } else { // successful login
             redirectAttributes.addFlashAttribute("user", user);
+            redirectAttributes.addFlashAttribute("username", username);
             return "redirect:/user/dashboard";
         }
     }
@@ -52,8 +53,9 @@ public class LoginController {
     public String handleUponSuccessUserLogin(ModelMap model, @ModelAttribute("user") Users currentUser) {
         String[] monthValues = months.split(",");
 
-        // send username to be displayed in the dashboard
-        model.addAttribute("username", currentUser.getUsername());
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
 
         // current year and current month for users timezone needs to be obtained
         java.util.TimeZone tz = java.util.TimeZone.getTimeZone(timezone);
