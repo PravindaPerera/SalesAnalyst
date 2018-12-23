@@ -64,12 +64,14 @@ public class LoginController {
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", monthValues[c.get(Calendar.MONTH)]);
 
+        // @todo: Take this from db
         // current months actual and budgeted sales/cost vales need to be displayed
         model.addAttribute("actualSalesValue", 100);
         model.addAttribute("budgetedSalesValue", 70);
         model.addAttribute("actualCostValue", 80);
         model.addAttribute("budgetedCostValue", 50);
 
+        // @todo: Take this from db
         // array of year sales and costs in each individual month
         int[] monthlySales = new int[] {100, 200, 125, 70, 80, 300, 200, 100, 130, 270, 0, 0};
         int[] monthlyCosts = new int[] {60, 80, 150, 90, 90, 200, 150, 120, 140, 200, 0, 0};

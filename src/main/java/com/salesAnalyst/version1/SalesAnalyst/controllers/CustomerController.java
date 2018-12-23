@@ -33,11 +33,13 @@ public class CustomerController {
 
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
 
+        // @todo: Take this from db
         // customer details
         model.addAttribute("customerName", "TGIF Colombo");
         model.addAttribute("customerBusiness", "Restaurant Management");
         model.addAttribute("customerAddress", "555A, Canal Row, Colombo 01");
 
+        // @todo: Take this from db
         // array of company total sales each month
         int[] totalMonthlySales = new int[] {500, 400, 325, 190, 180, 800, 600, 500, 630, 470, 0, 0};
         // array of monthly sales of the customer
