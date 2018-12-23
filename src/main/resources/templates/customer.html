@@ -149,7 +149,7 @@
                                     </div>
                                     <!-- start of user-activity-graph -->
                                     <div>
-                                        <canvas id="monthlySalesChart"></canvas>
+                                        <canvas id="monthlyCustomerSalesChart"></canvas>
                                     </div>
                                     <!-- end of user-activity-graph -->
 
@@ -207,134 +207,20 @@
                                                         <th>Month</th>
                                                         <th class="hidden-phone">Monthly Customer Revenue (Rs)</th>
                                                         <th class="hidden-phone">Monthly Total Revenue (Rs)</th>
-                                                        <th>Contribution for Monthly Revenue</th>
+                                                        <th>Contribution for Monthly Revenue (%)</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>January</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>February</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-danger" data-transitiongoal="15"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>March</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-success" data-transitiongoal="45"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>April</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-success" data-transitiongoal="75"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>May</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>June</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-danger" data-transitiongoal="15"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>July</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-success" data-transitiongoal="45"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>August</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-success" data-transitiongoal="75"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-
-
-                                                    <tr>
-                                                        <td>September</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>October</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-danger" data-transitiongoal="15"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>November</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-success" data-transitiongoal="45"></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>December</td>
-                                                        <td class="hidden-phone">2000</td>
-                                                        <td class="hidden-phone">10000</td>
-                                                        <td class="vertical-align-mid">
-                                                            <div class="progress">
-                                                                <div class="progress-bar progress-bar-success" data-transitiongoal="75"></div>
-                                                            </div>
-                                                        </td>
+                                                    <tr th:each="sale,itrStat : ${totalMonthlySales}">
+                                                        <td th:text="${monthValues[itrStat.index]}" />
+                                                        <td th:text="${customerMonthlySales[itrStat.index]}" />
+                                                        <td th:text="${sale}" />
+                                                        <td th:text="${salesPropotion[itrStat.index]} == 0 ? ${notApplicable} : ${#numbers.formatDecimal(salesPropotion[itrStat.index], 0, 2)}" />
+                                                        <!--<td class="vertical-align-mid">-->
+                                                        <!--<div class="progress">-->
+                                                        <!--<div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>-->
+                                                        <!--</div>-->
+                                                        <!--</td>-->
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -397,18 +283,19 @@
 <script src="/styles/build/js/custom.min.js"></script>
 
 <script th:inline="javascript">
-  var salesCostsYearly = document.getElementById("monthlySalesChart");
+  var salesCostsYearly = document.getElementById("monthlyCustomerSalesChart");
   salesCostsYearly.height = 100;
   /*<![CDATA[*/
-  var monthlySales = /*[[${monthlySales}]]*/ 0;
+  var customerMonthlySales = /*[[${customerMonthlySales}]]*/ 0;
+  var monthValues = /*[[${monthValues}]]*/ [];
   /*]]>*/
   new Chart(salesCostsYearly, {
     type: 'bar',
     data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      labels: monthValues,
       datasets: [{
         label: 'Sales',
-        data: monthlySales,
+        data: customerMonthlySales,
         backgroundColor: '#26B99A',
         borderColor: '#000000',
         borderWidth: 1
@@ -435,15 +322,17 @@
   customerProduct.height = 100;
   /*<![CDATA[*/
   var customerProductSales = /*[[${customerProductSales}]]*/ 0;
+  var productNames = /*[[${productNames}]]*/ [];
+  var colourCodes = /*[[${colourCodes}]]*/ [];
   /*]]>*/
   new Chart(customerProduct, {
     type: 'pie',
     data: {
-      labels: ["Product1", "Product2", "Product3", "Product4", "Product5", "Product6"],
+      labels: productNames,
       datasets: [{
         label: 'Sales',
         data: customerProductSales,
-        backgroundColor: ['#26B99A', '#26B9B9', '#268AB9', '#264CB9', '#5326B9', '#8A26B9'],
+        backgroundColor: colourCodes,
         borderColor: '#000000',
         borderWidth: 1
       }]

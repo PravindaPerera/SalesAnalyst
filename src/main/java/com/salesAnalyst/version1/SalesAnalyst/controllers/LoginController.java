@@ -75,6 +75,7 @@ public class LoginController {
         int[] monthlyCosts = new int[] {60, 80, 150, 90, 90, 200, 150, 120, 140, 200, 0, 0};
         model.addAttribute("monthlySales", monthlySales);
         model.addAttribute("monthlyCosts", monthlyCosts);
+        model.addAttribute("monthValues", monthValues);
         return "dashboard";
     }
 

@@ -293,11 +293,12 @@
   /*<![CDATA[*/
   var monthlySales = /*[[${monthlySales}]]*/ 0;
   var monthlyCosts = /*[[${monthlyCosts}]]*/ 0;
+  var monthValues = /*[[${monthValues}]]*/ [];
   /*]]>*/
   new Chart(salesCostsYearly, {
     type: 'bar',
     data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      labels: monthValues,
       datasets: [{
         label: 'Sales',
         data: monthlySales,
