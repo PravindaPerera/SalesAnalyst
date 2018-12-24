@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 @Controller
@@ -19,12 +21,30 @@ public class ProductController {
     private String months;
 
     @GetMapping(path="/user/product") // Map ONLY GET Requests with the path /user/product
-    public String handleCustomerViewDisplay(ModelMap model) {
+    public String handleCustomerViewDisplay(ModelMap model, @RequestParam(value = "prodId", required = false) String prodId) {
 
         String[] monthValues = months.split(",");
 
         if (!model.containsAttribute("username")) {
             return "redirect:/";
+        }
+
+        // @todo get the product list from db and set the 1st product of the list to selectedProduct by default
+        ArrayList<String> productNames = new ArrayList<String>();
+        productNames.add("Product 1");
+        productNames.add("Product 2");
+        productNames.add("Product 3");
+        productNames.add("Product 4");
+        ArrayList<String> productIds = new ArrayList<String>();
+        productIds.add("111");
+        productIds.add("222");
+        productIds.add("333");
+        productIds.add("444");
+
+        String selectedProduct = productNames.get(0);
+
+        if (prodId != null) {
+            selectedProduct = productNames.get(productIds.indexOf(prodId));
         }
 
         // current year for customers timezone needs to be obtained
@@ -54,6 +74,9 @@ public class ProductController {
         model.addAttribute("salesPropotion", salesPropotion);
         model.addAttribute("monthValues", monthValues);
         model.addAttribute("notApplicable", "N/A");
+        model.addAttribute("productNames", productNames);
+        model.addAttribute("productIds", productIds);
+        model.addAttribute("selectedProduct", selectedProduct);
         return "product";
     }
 }
