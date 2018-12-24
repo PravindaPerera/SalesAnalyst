@@ -102,6 +102,22 @@
                 <div class="clearfix"></div>
 
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <form action="" method="GET">
+
+                                <select class="form-control" name="custId" id="custId" onchange="this.form.submit()">
+                                    <option th:each="sale,itrStat : ${customerNames}" th:value="${customerIds[itrStat.index]}"
+                                            th:text="${customerNames[itrStat.index]}" th:selected="${customerNames[itrStat.index] == selectedCustomer} ? 'selected' : null">
+                                    </option>
+                                </select>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
