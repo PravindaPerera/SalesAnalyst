@@ -59,8 +59,12 @@ public class SalesController {
     }
 
     @PostMapping(path="/user/recordSale")
-    public String handleUserLogin(@RequestParam(value = "salesReqId", required = false) String salesReqId, @RequestParam(value = "customerId", required = false) String customerId,
+    public String handleUserLogin(ModelMap model, @RequestParam(value = "salesReqId", required = false) String salesReqId, @RequestParam(value = "customerId", required = false) String customerId,
                                   @RequestParam(value = "productId", required = false) String productId, @RequestParam String saleValue, @RequestParam String salesDate) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
 
         String[] date = salesDate.split("-");
         String day = date[0];

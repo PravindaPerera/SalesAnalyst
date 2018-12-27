@@ -29,7 +29,11 @@ public class CostsController {
     }
 
     @PostMapping(path="/user/recordCost")
-    public String handleUserLogin(@RequestParam(value = "costReqId", required = false) String costReqId, @RequestParam String costValue, @RequestParam String costDate) {
+    public String handleUserLogin(ModelMap model, @RequestParam(value = "costReqId", required = false) String costReqId, @RequestParam String costValue, @RequestParam String costDate) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
 
         String[] date = costDate.split("-");
         String day = date[0];
