@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import java.util.ArrayList;
-
 @Controller
 @SessionAttributes("username")
 public class CostsController {
@@ -20,7 +18,7 @@ public class CostsController {
     @Value("${app.months}")
     private String months;
 
-    @GetMapping(path="/user/costs") // Map ONLY GET Requests with the path /user/customer
+    @GetMapping(path="/user/costs")
     public String handleSalesViewDisplay(ModelMap model) {
 
         if (!model.containsAttribute("username")) {

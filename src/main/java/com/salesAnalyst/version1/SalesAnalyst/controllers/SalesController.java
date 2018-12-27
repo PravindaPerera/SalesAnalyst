@@ -20,7 +20,7 @@ public class SalesController {
     @Value("${app.months}")
     private String months;
 
-    @GetMapping(path="/user/sales") // Map ONLY GET Requests with the path /user/customer
+    @GetMapping(path="/user/sales")
     public String handleSalesViewDisplay(ModelMap model) {
 
         if (!model.containsAttribute("username")) {
