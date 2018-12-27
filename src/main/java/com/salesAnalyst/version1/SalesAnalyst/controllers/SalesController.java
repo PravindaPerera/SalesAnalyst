@@ -20,7 +20,7 @@ public class SalesController {
     @Value("${app.months}")
     private String months;
 
-    @GetMapping(path="/user/sales") // Map ONLY GET Requests with the path /user/customer
+    @GetMapping(path="/user/sales")
     public String handleSalesViewDisplay(ModelMap model) {
 
         if (!model.containsAttribute("username")) {
@@ -58,13 +58,13 @@ public class SalesController {
         return "sales";
     }
 
-    @PostMapping(path="/user/recordSale") // Map ONLY POST Requests with the path /login
+    @PostMapping(path="/user/recordSale")
     public String handleUserLogin(@RequestParam(value = "salesReqId", required = false) String salesReqId, @RequestParam(value = "customerId", required = false) String customerId,
                                   @RequestParam(value = "productId", required = false) String productId, @RequestParam String saleValue, @RequestParam String salesDate) {
 
-        String[] date = salesDate.split("/");
-        String day = date[1];
-        String month = date[0];
+        String[] date = salesDate.split("-");
+        String day = date[0];
+        String month = date[1];
         String year = date[2];
 
         // @todo obtain these elements and add a new entry to the sales table
