@@ -79,9 +79,13 @@
                             </li>
                             <li><a href="costs"><i class="fa fa-money"></i> Record Cost </a>
                             </li>
-                            <li><a href="addCustomer"><i class="fa fa-money"></i> Add Customer </a>
+                            <li><a href="addCustomer"><i class="fa fa-user-plus"></i> Add Customer </a>
                             </li>
-                            <li><a href="addProduct"><i class="fa fa-money"></i> Add Product </a>
+                            <li><a href="addProduct"><i class="fa fa-plus"></i> Add Product </a>
+                            </li>
+                            <li><a href="addSalesBudget"><i class="fa fa-briefcase"></i> Add Sales Budget </a>
+                            </li>
+                            <li><a href="addCostBudget"><i class="fa fa-briefcase"></i> Add Cost Budget </a>
                             </li>
 
                         </ul>
@@ -126,32 +130,32 @@
             <div class="row tile_count">
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Total Sales</span>
-                    <div class="count green">2,500</div>
+                    <div class="count green" th:inline="text">[[${totalSales}]]</div>
                     <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Total Costs</span>
-                    <div class="count">1,250</div>
+                    <div class="count" th:inline="text">[[${totalCosts}]]</div>
                     <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Total Profit</span>
-                    <div class="count green">1,250</div>
+                    <div class="count green" th:inline="text">[[${totalSales - totalCosts}]]</div>
                     <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Sales Target</span>
-                    <div class="count green">2,000</div>
+                    <div class="count green" th:inline="text">[[${totalBudgetedSales}]]</div>
                     <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Budgeted Total Costs</span>
-                    <div class="count">1,500</div>
+                    <div class="count" th:inline="text">[[${totalBudgetedCosts}]]</div>
                     <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Profit Variance (Actual - Budgeted)</span>
-                    <div class="count green">750</div>
+                    <div class="count green" th:inline="text">[[${(totalSales - totalCosts) - (totalBudgetedSales - totalBudgetedCosts)}]]</div>
                     <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
                 </div>
             </div>

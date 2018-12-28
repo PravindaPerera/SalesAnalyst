@@ -19,7 +19,7 @@ public class CostsController {
     private String months;
 
     @GetMapping(path="/user/costs")
-    public String handleSalesViewDisplay(ModelMap model) {
+    public String handleCostsViewDisplay(ModelMap model) {
 
         if (!model.containsAttribute("username")) {
             return "redirect:/";
@@ -29,7 +29,7 @@ public class CostsController {
     }
 
     @PostMapping(path="/user/recordCost")
-    public String handleUserLogin(ModelMap model, @RequestParam(value = "costReqId", required = false) String costReqId, @RequestParam String costValue, @RequestParam String costDate) {
+    public String handleCostRecord(ModelMap model, @RequestParam(value = "costReqId", required = false) String costReqId, @RequestParam String costValue, @RequestParam String costDate) {
 
         if (!model.containsAttribute("username")) {
             return "redirect:/";
@@ -41,6 +41,39 @@ public class CostsController {
         String year = date[2];
 
         // @todo obtain these elements and add a new entry to the cost table
+
+        return "redirect:/user/dashboard";
+    }
+
+    @GetMapping(path="/user/addCostBudget")
+    public String handleBudgetedCostViewDisplay(ModelMap model) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
+
+        return "addCostBudget";
+    }
+
+    @PostMapping(path="/user/saveCostBudget")
+    public String handleSaveCostBudget(ModelMap model, @RequestParam(value = "all", required = false) String all, @RequestParam(value = "jan", required = false) String jan,
+                                        @RequestParam(value = "feb", required = false) String feb, @RequestParam(value = "mar", required = false) String mar,
+                                        @RequestParam(value = "apr", required = false) String apr, @RequestParam(value = "may", required = false) String may,
+                                        @RequestParam(value = "jun", required = false) String jun, @RequestParam(value = "jul", required = false) String jul,
+                                        @RequestParam(value = "aug", required = false) String aug, @RequestParam(value = "sep", required = false) String sep,
+                                        @RequestParam(value = "oct", required = false) String oct, @RequestParam(value = "nov", required = false) String nov,
+                                        @RequestParam(value = "dec", required = false) String dec, @RequestParam String CostBudget) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
+
+        // if user has ticked the checkbox the value will be "on"
+        // else value will be null
+        // always values will be set to the current years months
+        // inserts and updates both should be possible
+
+        // @todo obtain these elements and add a new entry to the budgeted costs table
 
         return "redirect:/user/dashboard";
     }
