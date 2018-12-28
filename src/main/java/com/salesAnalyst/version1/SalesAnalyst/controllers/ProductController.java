@@ -22,7 +22,7 @@ public class ProductController {
     private String months;
 
     @GetMapping(path="/user/product") // Map ONLY GET Requests with the path /user/product
-    public String handleCustomerViewDisplay(ModelMap model, @RequestParam(value = "prodId", required = false) String prodId) {
+    public String handleProductViewDisplay(ModelMap model, @RequestParam(value = "prodId", required = false) String prodId) {
 
         String[] monthValues = months.split(",");
 

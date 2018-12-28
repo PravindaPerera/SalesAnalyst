@@ -59,7 +59,7 @@ public class SalesController {
     }
 
     @PostMapping(path="/user/recordSale")
-    public String handleUserLogin(ModelMap model, @RequestParam(value = "salesReqId", required = false) String salesReqId, @RequestParam(value = "customerId", required = false) String customerId,
+    public String handleRecordSale(ModelMap model, @RequestParam(value = "salesReqId", required = false) String salesReqId, @RequestParam(value = "customerId", required = false) String customerId,
                                   @RequestParam(value = "productId", required = false) String productId, @RequestParam String saleValue, @RequestParam String salesDate) {
 
         if (!model.containsAttribute("username")) {
@@ -72,6 +72,39 @@ public class SalesController {
         String year = date[2];
 
         // @todo obtain these elements and add a new entry to the sales table
+
+        return "redirect:/user/dashboard";
+    }
+
+    @GetMapping(path="/user/addSalesBudget")
+    public String handleBudgetedSalesViewDisplay(ModelMap model) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
+
+        return "addSalesBudget";
+    }
+
+    @PostMapping(path="/user/saveSalesBudget")
+    public String handleSaveSalesBudget(ModelMap model, @RequestParam(value = "all", required = false) String all, @RequestParam(value = "jan", required = false) String jan,
+                                  @RequestParam(value = "feb", required = false) String feb, @RequestParam(value = "mar", required = false) String mar,
+                                        @RequestParam(value = "apr", required = false) String apr, @RequestParam(value = "may", required = false) String may,
+                                        @RequestParam(value = "jun", required = false) String jun, @RequestParam(value = "jul", required = false) String jul,
+                                        @RequestParam(value = "aug", required = false) String aug, @RequestParam(value = "sep", required = false) String sep,
+                                        @RequestParam(value = "oct", required = false) String oct, @RequestParam(value = "nov", required = false) String nov,
+                                        @RequestParam(value = "dec", required = false) String dec, @RequestParam String SalesBudget) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
+
+        // if user has ticked the checkbox the value will be "on"
+        // else value will be null
+        // always values will be set to the current years months
+        // inserts and updates both should be possible
+
+        // @todo obtain these elements and add a new entry to the budgeted sales table
 
         return "redirect:/user/dashboard";
     }

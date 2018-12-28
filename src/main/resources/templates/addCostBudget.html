@@ -118,7 +118,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Add New Product</h3>
+                        <h3>Add Cost Budget</h3>
                     </div>
                 </div>
 
@@ -128,24 +128,111 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Add Product <small>form</small></h2>
+                                <h2>Add Cost <small>form</small></h2>
 
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
                                 <br />
-                                <form id="addProduct" data-parsley-validate class="form-horizontal form-label-left" action="/user/registerProduct" method="POST">
+                                <form id="costBudgetForm" data-parsley-validate class="form-horizontal form-label-left" action="/user/saveCostBudget" method="POST">
 
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="prodName">Product Name <span class="required">*</span></label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="prodName" name="prodName" required="required" class="form-control col-md-7 col-xs-12">
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="all" name="all" class="flat"> Select All
+                                                </label>
+                                            </div>
+
+                                            <br />
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="jan" name="jan" class="flat"> January
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="feb" name="feb" class="flat"> February
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="mar" name="mar" class="flat"> March
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="apr" name="apr" class="flat"> April
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="may" name="may" class="flat"> May
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="jun" name="jun" class="flat"> June
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="jul" name="jul" class="flat"> July
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="aug" name="aug" class="flat"> August
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="sep" name="sep" class="flat"> September
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="oct" name="oct" class="flat"> October
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="nov" name="nov" class="flat"> November
+                                                </label>
+                                            </div>
+
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="dec" name="dec" class="flat"> December
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label pull-left">Budget <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-3 col-sm-3 col-xs-12">
+                                            <input id="CostBudget" name="CostBudget" class="form-control" required="required" type="number" step=".01" min="0">
                                         </div>
                                     </div>
 
                                     <div class="ln_solid"></div>
                                     <div class="form-group">
-                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
                                             <button class="btn btn-primary" type="reset">Reset</button>
                                             <button type="submit" class="btn btn-success">Submit</button>
                                         </div>
