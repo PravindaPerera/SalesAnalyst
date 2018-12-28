@@ -83,19 +83,19 @@ public class LoginController {
         int totalBudgetedCosts = 0;
         for (int salesValue : monthlySales)
         {
-            totalSales += salesValue; //1575
+            totalSales += salesValue;
         }
         for (int costValue : monthlyCosts)
         {
-            totalCosts += costValue; //1280
+            totalCosts += costValue;
         }
         for (int budgetedSaleValue : monthlyBudgetedSales)
         {
-            totalBudgetedSales += budgetedSaleValue; //252
+            totalBudgetedSales += budgetedSaleValue;
         }
         for (int budgetedCostValue : monthlyBudgetedCosts)
         {
-            totalBudgetedCosts += budgetedCostValue; //128
+            totalBudgetedCosts += budgetedCostValue;
         }
         model.addAttribute("monthlySales", monthlySales);
         model.addAttribute("monthlyCosts", monthlyCosts);
