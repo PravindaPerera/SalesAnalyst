@@ -134,7 +134,6 @@ public class LoginController {
         java.util.Calendar c = java.util.Calendar.getInstance(tz);
 
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
-        model.addAttribute("currentMonth", monthValues[c.get(Calendar.MONTH)]);
 
         String selectedYear = Integer.toString(c.get(Calendar.YEAR));
 
