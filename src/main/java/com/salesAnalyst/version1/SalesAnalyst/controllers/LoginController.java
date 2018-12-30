@@ -2,6 +2,7 @@ package com.salesAnalyst.version1.SalesAnalyst.controllers;
 
 import com.salesAnalyst.version1.SalesAnalyst.entities.Users;
 import com.salesAnalyst.version1.SalesAnalyst.repositories.UsersRepository;
+import com.salesAnalyst.version1.SalesAnalyst.serviceFacades.SaleserviceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,8 @@ import java.util.Calendar;
 public class LoginController {
     @Autowired // This means to inject the bean called userRepository
     private UsersRepository userRepository;
-
+@Autowired
+private SaleserviceFacade saleserviceFacade;
     @Value("${app.timezone}")
     private String timezone;
     @Value("${app.months}")
@@ -63,21 +65,8 @@ public class LoginController {
 
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", monthValues[c.get(Calendar.MONTH)]);
-
-        // @todo: Take this from db
-        // current months actual and budgeted sales/cost vales need to be displayed
-        model.addAttribute("actualSalesValue", 100);
-        model.addAttribute("budgetedSalesValue", 70);
-        model.addAttribute("actualCostValue", 80);
-        model.addAttribute("budgetedCostValue", 50);
-
-        // @todo: Take this from db
-        // array of year sales and costs in each individual month
-        int[] monthlySales = new int[] {100, 200, 125, 70, 80, 300, 200, 100, 130, 270, 0, 0};
-        int[] monthlyCosts = new int[] {60, 80, 150, 90, 90, 200, 150, 120, 140, 200, 0, 0};
-        model.addAttribute("monthlySales", monthlySales);
-        model.addAttribute("monthlyCosts", monthlyCosts);
         model.addAttribute("monthValues", monthValues);
+        model=saleserviceFacade.getDashBoardModel(model,c.get(Calendar.YEAR),c.get(Calendar.MONTH));
         return "dashboard";
     }
 
