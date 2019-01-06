@@ -57,6 +57,7 @@ public class ProductController {
         // product details
         model.addAttribute("productName", "Product A");
 
+        // @todo: Take this from db
         // array of company total sales each month
         int[] totalMonthlySales = new int[] {500, 400, 325, 190, 180, 800, 600, 500, 630, 470, 0, 0};
         // array of monthly sales of the focused product

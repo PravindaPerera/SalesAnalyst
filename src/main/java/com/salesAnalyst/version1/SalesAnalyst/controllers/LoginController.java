@@ -2,6 +2,7 @@ package com.salesAnalyst.version1.SalesAnalyst.controllers;
 
 import com.salesAnalyst.version1.SalesAnalyst.entities.Users;
 import com.salesAnalyst.version1.SalesAnalyst.repositories.UsersRepository;
+import com.salesAnalyst.version1.SalesAnalyst.serviceFacades.SaleserviceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,8 @@ import java.util.Calendar;
 public class LoginController {
     @Autowired // This means to inject the bean called userRepository
     private UsersRepository userRepository;
-
+@Autowired
+private SaleserviceFacade saleserviceFacade;
     @Value("${app.timezone}")
     private String timezone;
     @Value("${app.months}")
@@ -102,10 +104,12 @@ public class LoginController {
         model.addAttribute("monthlyCosts", monthlyCosts);
         model.addAttribute("monthValues", monthValues);
 
+
         model.addAttribute("totalSales", totalSales);
         model.addAttribute("totalCosts", totalCosts);
         model.addAttribute("totalBudgetedSales", totalBudgetedSales);
         model.addAttribute("totalBudgetedCosts", totalBudgetedCosts);
+        model=saleserviceFacade.getDashBoardModel(model,c.get(Calendar.YEAR),c.get(Calendar.MONTH));
         return "dashboard";
     }
 
