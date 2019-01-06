@@ -30,6 +30,7 @@ public class ProductController {
             return "redirect:/";
         }
 
+        // @todo new - check on what should be moved to facade
         // @todo get the product list from db and set the 1st product of the list to selectedProduct by default
         ArrayList<String> productNames = new ArrayList<String>();
         productNames.add("Product 1");

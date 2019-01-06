@@ -33,6 +33,7 @@ public class CustomerController {
         if (!model.containsAttribute("username")) {
             return "redirect:/";
         }
+        // @todo new - check on what should be moved to facade
 
         // @todo get the customer list from db and set the 1st customer of the list to selectedCustomer by default
         ArrayList<String> customerNames = new ArrayList<String>();
@@ -68,7 +69,7 @@ public class CustomerController {
         model.addAttribute("selectedCustomer", selectedCustomer);
         model.addAttribute("monthValues", monthValues);
 
-        model=saleserviceFacade.getSalesService(model);
+        model = saleserviceFacade.getSalesService(model);
         return "customer";
     }
 

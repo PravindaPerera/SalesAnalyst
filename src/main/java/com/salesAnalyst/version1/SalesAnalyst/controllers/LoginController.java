@@ -60,6 +60,8 @@ private SaleserviceFacade saleserviceFacade;
             return "redirect:/";
         }
 
+        // @todo new - check on what should be moved to facade
+
         // current year and current month for users timezone needs to be obtained
         java.util.TimeZone tz = java.util.TimeZone.getTimeZone(timezone);
         java.util.Calendar c = java.util.Calendar.getInstance(tz);
@@ -109,7 +111,8 @@ private SaleserviceFacade saleserviceFacade;
         model.addAttribute("totalCosts", totalCosts);
         model.addAttribute("totalBudgetedSales", totalBudgetedSales);
         model.addAttribute("totalBudgetedCosts", totalBudgetedCosts);
-        model=saleserviceFacade.getDashBoardModel(model,c.get(Calendar.YEAR),c.get(Calendar.MONTH));
+        // @todo new - check on this assignment
+        model = saleserviceFacade.getDashBoardModel(model,c.get(Calendar.YEAR),c.get(Calendar.MONTH));
         return "dashboard";
     }
 
