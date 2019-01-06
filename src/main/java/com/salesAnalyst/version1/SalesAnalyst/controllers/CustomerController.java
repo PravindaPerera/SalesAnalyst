@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -69,5 +70,28 @@ public class CustomerController {
 
         model=saleserviceFacade.getSalesService(model);
         return "customer";
+    }
+
+    @GetMapping(path="/user/addCustomer")
+    public String handleAddCustomerDisplay(ModelMap model) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
+
+        return "addCustomer";
+    }
+
+    @PostMapping(path="/user/registerCustomer")
+    public String handleRegisterCustomer(ModelMap model, @RequestParam String custName, @RequestParam(value = "custBusiness", required = false) String custBusiness, @RequestParam(value = "custAddress", required = false) String custAddress) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
+
+        // @todo: Add new customer to customer table
+        // @todo: Verify how the custAddress is added (with or without new lines)
+
+        return "redirect:/user/dashboard";
     }
 }

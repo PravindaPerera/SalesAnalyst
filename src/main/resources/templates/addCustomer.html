@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/ico" />
+
+    <title>Sales Analyst</title>
+
+    <!-- Bootstrap -->
+    <link href="/styles/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/styles/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/styles/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="/styles/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker -->
+    <link href="/styles/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="/styles/build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="dashboard" class="site_title"><i class="fa fa-balance-scale"></i> <span>Sales Analyst</span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <div class="profile_pic">
+                        <img src="/images/user-icon.png" alt="..." class="img-circle profile_img">
+                    </div>
+                    <div class="profile_info">
+                        <span>Welcome,</span>
+                        <h2 th:text="${username}" />
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>Analytics</h3>
+                        <ul class="nav side-menu">
+
+                            <li><a href="dashboard"><i class="fa fa-tachometer"></i> Dashboard </a>
+                            </li>
+                            <li><a href="customer"><i class="fa fa-user"></i> Customers </a>
+                            </li>
+                            <li><a href="product"><i class="fa fa-product-hunt"></i> Product </a>
+                            </li>
+                            <li><a href="history"><i class="fa fa-history"></i> History </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="menu_section">
+                        <h3>Data Entry</h3>
+                        <ul class="nav side-menu">
+
+                            <li><a href="sales"><i class="fa fa-money"></i> Record Sale </a>
+                            </li>
+                            <li><a href="costs"><i class="fa fa-money"></i> Record Cost </a>
+                            </li>
+                            <li><a href="addCustomer"><i class="fa fa-user-plus"></i> Add Customer </a>
+                            </li>
+                            <li><a href="addProduct"><i class="fa fa-plus"></i> Add Product </a>
+                            </li>
+                            <li><a href="addSalesBudget"><i class="fa fa-briefcase"></i> Add Sales Budget </a>
+                            </li>
+                            <li><a href="addCostBudget"><i class="fa fa-briefcase"></i> Add Cost Budget </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <!--<div class="user-profile">-->
+                            <!--<img src="/images/user-icon.png" alt="" th:text="${username}">-->
+                            <!--</div>-->
+                            <a style="pointer-events: none; cursor: default;" class="user-profile">
+                                <img src="/images/user-icon.png" alt="" th:text="${username}">
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Add New Customer</h3>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Add Customer <small>form</small></h2>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br />
+                                <form id="addCustomer" data-parsley-validate class="form-horizontal form-label-left" action="/user/registerCustomer" method="POST">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="custName">Cost Name <span class="required">*</span></label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="custName" name="custName" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer Business</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="custBusiness" name="custBusiness" class="date-picker form-control col-md-7 col-xs-12" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer Address</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <textarea id="custAddress" name="custAddress" class="form-control col-md-7 col-xs-12"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <button class="btn btn-primary" type="reset">Reset</button>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                ©2018 All Rights Reserved. <a href=""></a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="/styles/vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/styles/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="/styles/vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="/styles/vendors/nprogress/nprogress.js"></script>
+<!-- Chart.js -->
+<script src="/styles/vendors/Chart.js/dist/Chart.min.js"></script>
+<!-- morris.js -->
+<script src="/styles/vendors/raphael/raphael.min.js"></script>
+<script src="/styles/vendors/morris.js/morris.min.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="/styles/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="/styles/vendors/moment/min/moment.min.js"></script>
+<script src="/styles/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap-datetimepicker -->
+<script src="/styles/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<!-- Datatables -->
+<script src="/styles/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/styles/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="/styles/build/js/custom.min.js"></script>
+
+</body>
+</html>

@@ -127,38 +127,54 @@
         <!-- page content -->
         <div class="right_col" role="main">
 
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <form action="" method="GET">
+
+                            <select class="form-control" name="year" id="year" onchange="this.form.submit()">
+                                <option th:each="sale,itrStat : ${years}" th:value="${years[itrStat.index]}"
+                                        th:text="${years[itrStat.index]}" th:selected="${years[itrStat.index] == selectedYear} ? 'selected' : null">
+                                </option>
+                            </select>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <!-- Item 1 -->
             <!-- top tile view for the year snapshot sales/costs/profit against budgeted [start] -->
             <div class="row tile_count">
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Total Sales</span>
                     <div class="count green" th:inline="text">[[${totalSales}]]</div>
-                    <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
+                    <span class="count_bottom" th:inline="text"> For the year [[${selectedYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Total Costs</span>
                     <div class="count" th:inline="text">[[${totalCosts}]]</div>
-                    <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
+                    <span class="count_bottom" th:inline="text"> For the year [[${selectedYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Total Profit</span>
                     <div class="count green" th:inline="text">[[${totalSales - totalCosts}]]</div>
-                    <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
+                    <span class="count_bottom" th:inline="text"> For the year [[${selectedYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Sales Target</span>
                     <div class="count green" th:inline="text">[[${totalBudgetedSales}]]</div>
-                    <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
+                    <span class="count_bottom" th:inline="text"> For the year [[${selectedYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Budgeted Total Costs</span>
                     <div class="count" th:inline="text">[[${totalBudgetedCosts}]]</div>
-                    <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
+                    <span class="count_bottom" th:inline="text"> For the year [[${selectedYear}]]</span>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-money"></i> Profit Variance (Actual - Budgeted)</span>
                     <div class="count green" th:inline="text">[[${(totalSales - totalCosts) - (totalBudgetedSales - totalBudgetedCosts)}]]</div>
-                    <span class="count_bottom" th:inline="text"> For the year [[${currentYear}]]</span>
+                    <span class="count_bottom" th:inline="text"> For the year [[${selectedYear}]]</span>
                 </div>
             </div>
             <!-- top tile view for the year snapshot sales/costs/profit against budgeted [end] -->
@@ -169,7 +185,7 @@
                     <div class="x_panel">
                         <div class="row">
                             <div class="x_title">
-                                <h3>Sales/Costs Breakdown<small th:inline="text"> for the year [[${currentYear}]]</small></h3>
+                                <h3>Sales/Costs Breakdown<small th:inline="text"> for the year [[${selectedYear}]]</small></h3>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
@@ -182,76 +198,6 @@
 
             </div>
             <br />
-
-            <!-- Monthly sales and costs breakdown -->
-            <div class="row">
-
-                <!-- Sales monthly stats breakdown [start] -->
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="x_panel">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                <div class="x_title">
-                                    <h2>Sales Monthly statistics<small th:inline="text">Month - [[${currentMonth}]]</small></h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <canvas id="currentMonthSalesChart"></canvas>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                <div class="x_title">
-                                    <h2>Sales Variance<small th:inline="text">Month - [[${currentMonth}]]</small></h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <canvas id="currentMonthSalesVarianceChart"></canvas>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- Sales monthly stats breakdown [end] -->
-
-                <!-- Costs monthly stats breakdown [start] -->
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="x_panel">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                <div class="x_title">
-                                    <h2>Costs Monthly statistics<small th:inline="text">Month - [[${currentMonth}]]</small></h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <canvas id="currentMonthCostsChart"></canvas>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                <div class="x_title">
-                                    <h2>Costs Variance<small th:inline="text">Month - [[${currentMonth}]]</small></h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <canvas id="currentMonthCostsVarianceChart"></canvas>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- Costs monthly stats breakdown [end] -->
-            </div>
 
         </div>
         <!-- /page content -->
@@ -335,169 +281,6 @@
           borderColor: '#000000',
           borderWidth: 1
         }]
-    },
-    options: {
-      legend: {
-        display: false
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:!0
-          }
-        }]
-      }
-    }
-  });
-</script>
-
-<script th:inline="javascript">
-  var salesMonthly = document.getElementById("currentMonthSalesChart");
-  /*<![CDATA[*/
-  var actualSalesValue = /*[[${actualSalesValue}]]*/ 0;
-  var budgetedSalesValue = /*[[${budgetedSalesValue}]]*/ 0;
-  /*]]>*/
-  new Chart(salesMonthly, {
-    type: 'bar',
-    data: {
-      labels: ["Actual", "Budgeted"],
-      datasets: [{
-        label: 'Sales',
-        data: [actualSalesValue, budgetedSalesValue],
-        backgroundColor: [
-          '#26B99A',
-          '#03586A'
-        ],
-        borderColor: [
-          '#000000',
-          '#000000'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      legend: {
-        display: false
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:!0
-          }
-        }]
-      }
-    }
-  });
-</script>
-
-<script th:inline="javascript">
-  var salesVarianceMonthly = document.getElementById("currentMonthSalesVarianceChart");
-  /*<![CDATA[*/
-  var actualSalesValue = /*[[${actualSalesValue}]]*/ 0;
-  var budgetedSalesValue = /*[[${budgetedSalesValue}]]*/ 0;
-  var backgroundColorcode;
-  if (actualSalesValue >= budgetedSalesValue) {
-    backgroundColorcode = "#26B99A";
-  } else {
-    backgroundColorcode = "#03586A";
-  }
-  /*]]>*/
-  new Chart(salesVarianceMonthly, {
-    type: 'bar',
-    data: {
-      labels: ["Variance"],
-      datasets: [{
-        label: 'Sales',
-        data: [actualSalesValue-budgetedSalesValue],
-        backgroundColor: [
-          backgroundColorcode
-        ],
-        borderColor: [
-          '#000000'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      legend: {
-        display: false
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:!0
-          }
-        }]
-      }
-    }
-  });
-</script>
-
-<script th:inline="javascript">
-  var costsMonthly = document.getElementById("currentMonthCostsChart");
-  /*<![CDATA[*/
-  var actualCostValue = /*[[${actualCostValue}]]*/ 0;
-  var budgetedCostValue = /*[[${budgetedCostValue}]]*/ 0;
-  /*]]>*/
-  new Chart(costsMonthly, {
-    type: 'bar',
-    data: {
-      labels: ["Actual", "Budgeted"],
-      datasets: [{
-        label: 'Costs',
-        data: [actualCostValue, budgetedCostValue],
-        backgroundColor: [
-          '#26B99A',
-          '#03586A'
-        ],
-        borderColor: [
-          '#000000',
-          '#000000'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      legend: {
-        display: false
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:!0
-          }
-        }]
-      }
-    }
-  });
-</script>
-
-<script th:inline="javascript">
-  var costsVarianceMonthly = document.getElementById("currentMonthCostsVarianceChart");
-  /*<![CDATA[*/
-  var actualCostValue = /*[[${actualCostValue}]]*/ 0;
-  var budgetedCostValue = /*[[${budgetedCostValue}]]*/ 0;
-  /*]]>*/
-  if (actualCostValue <= budgetedCostValue) {
-    backgroundColorcode = "#26B99A";
-  } else {
-    backgroundColorcode = "#03586A";
-  }
-  new Chart(costsVarianceMonthly, {
-    type: 'bar',
-    data: {
-      labels: ["Variance"],
-      datasets: [{
-        label: 'Costs',
-        data: [actualCostValue-budgetedCostValue],
-        backgroundColor: [
-          backgroundColorcode
-        ],
-        borderColor: [
-          '#000000'
-        ],
-        borderWidth: 1
-      }]
     },
     options: {
       legend: {

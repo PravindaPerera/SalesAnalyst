@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -21,7 +22,7 @@ public class ProductController {
     private String months;
 
     @GetMapping(path="/user/product") // Map ONLY GET Requests with the path /user/product
-    public String handleCustomerViewDisplay(ModelMap model, @RequestParam(value = "prodId", required = false) String prodId) {
+    public String handleProductViewDisplay(ModelMap model, @RequestParam(value = "prodId", required = false) String prodId) {
 
         String[] monthValues = months.split(",");
 
@@ -79,5 +80,27 @@ public class ProductController {
         model.addAttribute("productIds", productIds);
         model.addAttribute("selectedProduct", selectedProduct);
         return "product";
+    }
+
+    @GetMapping(path="/user/addProduct")
+    public String handleAddProductDisplay(ModelMap model) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
+
+        return "addProduct";
+    }
+
+    @PostMapping(path="/user/registerProduct")
+    public String handleRegisterProduct(ModelMap model, @RequestParam String prodName) {
+
+        if (!model.containsAttribute("username")) {
+            return "redirect:/";
+        }
+
+        // @todo: Add new product to product table
+
+        return "redirect:/user/dashboard";
     }
 }
