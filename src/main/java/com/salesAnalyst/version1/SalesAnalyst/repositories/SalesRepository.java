@@ -22,6 +22,10 @@ public interface SalesRepository extends CrudRepository<Sales, Long> {
     List<Long> findByYearByCousAndCustomer(@Param("year")int year,@Param("cust_id")int customerId);
     @Query(value = "SELECT SUM(c.slaeValue)  FROM com.salesAnalyst.version1.SalesAnalyst.entities.Sales c WHERE c.year=:year GROUP BY c.Product ORDER BY c.Product" )
     List<Long> findByYearProductSales(@Param("year")int year);
+
+    @Query(value = "SELECT SUM(c.slaeValue)  FROM com.salesAnalyst.version1.SalesAnalyst.entities.Sales c WHERE c.year=:year and c.Product=:product GROUP BY c.month ORDER BY c.month" )
+    List<Long> findByYearProductSalesForId(@Param("year")int year,@Param("product")String product);
+
     @Query(value = "SELECT SUM(c.slaeValue)  FROM com.salesAnalyst.version1.SalesAnalyst.entities.Sales c WHERE c.year=:year AND c.customer=:cust_id GROUP BY c.Product ORDER BY c.Product" )
     List<Long> findByYearProductSalesAndCustomer(@Param("year")int year,@Param("cust_id")int customerId);
     @Query(value = "SELECT SUM(c.slaeValue)  FROM com.salesAnalyst.version1.SalesAnalyst.entities.Sales c WHERE c.year=:year GROUP BY c.customer ORDER BY c.customer" )

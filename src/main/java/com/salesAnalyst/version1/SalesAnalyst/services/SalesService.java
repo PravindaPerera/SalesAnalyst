@@ -23,9 +23,9 @@ public class SalesService {
     }
 
 
-    public Long[] getSalesByProduct(int year){
+    public Long[] getSalesByProduct(int year,String prodId){
         //findByYearProductSales
-        List<Long> saleValues=salesRepository.findByYearProductSales(year);
+        List<Long> saleValues=salesRepository.findByYearProductSalesForId(year,prodId);
         Long[] integerArray=new Long[saleValues.size()];
         int i=0;
         for (Long saleValue : saleValues){
