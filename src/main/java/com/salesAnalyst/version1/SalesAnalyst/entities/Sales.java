@@ -19,11 +19,11 @@ public class Sales {
     private int month;
     @Basic
     @Column(name = "sales_value")
-    private int slaeValue;
+    private double slaeValue;
 
     @Basic
     @Column(name="product")
-    private String Product;
+    private int Product;
 
     @Basic
     @Column(name="customer")
@@ -62,11 +62,11 @@ public class Sales {
         this.customer = customer;
     }
 
-    public String getProduct() {
+    public int getProduct() {
         return Product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(int product) {
         Product = product;
     }
 
@@ -86,7 +86,7 @@ public class Sales {
         this.month = month;
     }
 
-    public Integer getSlaeValue() {
+    public Double getSlaeValue() {
         return slaeValue;
     }
 

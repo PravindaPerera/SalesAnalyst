@@ -58,6 +58,8 @@ public class CustomerController {
 
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
 
+        model=saleserviceFacade.getSalesService(model);
+
         // @todo: Take this from db
         // customer details
         model.addAttribute("customerName", "TGIF Colombo");
@@ -68,7 +70,6 @@ public class CustomerController {
         model.addAttribute("selectedCustomer", selectedCustomer);
         model.addAttribute("monthValues", monthValues);
 
-        model=saleserviceFacade.getSalesService(model);
         return "customer";
     }
 
