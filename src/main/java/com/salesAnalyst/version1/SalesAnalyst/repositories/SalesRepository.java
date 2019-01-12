@@ -12,7 +12,7 @@ import java.util.List;
 public interface SalesRepository extends CrudRepository<Sales, Long> {
 
     @Query(value = "SELECT SUM(c.slaeValue)  FROM com.salesAnalyst.version1.SalesAnalyst.entities.Sales c WHERE c.year=:year GROUP BY c.month ORDER BY c.month" )
-    List<Long> findByYear(@Param("year")int year);
+    List<Double> findByYear(@Param("year")int year);
 
 
 

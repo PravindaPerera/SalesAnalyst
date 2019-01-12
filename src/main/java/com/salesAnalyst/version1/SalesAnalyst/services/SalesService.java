@@ -10,11 +10,11 @@ import java.util.List;
 public class SalesService {
     @Autowired
     SalesRepository salesRepository;
-    public Long[] getSaleValues(int year){
-        List<Long> saleValues=salesRepository.findByYear(year);
-        Long[] integerArray=new Long[saleValues.size()];
+    public Double[] getSaleValues(int year){
+        List<Double> saleValues=salesRepository.findByYear(year);
+        Double[] integerArray=new Double[saleValues.size()];
         int i=0;
-     for (Long saleValue : saleValues){
+     for (Double saleValue : saleValues){
          integerArray[i]=saleValue;
          i++;
      }
@@ -74,4 +74,15 @@ public class SalesService {
     }
 
 
+//    public Long[] getCostByMonth(int year){
+//        List<Long> cost=salesRepository.findCostByYear(year);
+//        Long[] integerArray=new Long[cost.size()];
+//        int i=0;
+//        for (Long saleValue : cost){
+//            integerArray[i]=saleValue;
+//            i++;
+//        }
+//
+//        return  integerArray;
+//    }
 }

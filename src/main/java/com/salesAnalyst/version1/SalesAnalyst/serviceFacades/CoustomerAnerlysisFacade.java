@@ -54,7 +54,9 @@ public class CoustomerAnerlysisFacade {
     public ModelMap getSalesService(ModelMap model) {
         model = organizationService.getOrganizationDetails(model);
 
-        Long[] totalMonthlySales =salesService.getSaleValues(2017);
+        Double[] totalMonthlySales =salesService.getSaleValues(2017);
+//        Long[] coustomerSales=salesService.getSalesByCoustomer(2017);
+//        Long[] productSales=salesService.getSalesByProduct(2017);
         // @todo: Take this from db
         // array of company total sales each month
         // array of monthly sales of the customer
@@ -89,12 +91,52 @@ public class CoustomerAnerlysisFacade {
 
     public ModelMap getDashBoardModel(ModelMap model,int year,int month){
 
-        Long[] monthlySales = salesService.getSaleValues(2017);
-        Long[] monthlyCosts=costService.getCOstByMonth(2017);
+        // array of year sales and costs in each individual month
+        // sales values for a given year per month
+        Double[] monthlySales = salesService.getSaleValues(year);
+        // cost values for a given year per month
+        Long[] monthlyCosts=costService.getCOstByMonth(year);
         model.addAttribute("actualSalesValue", monthlySales[month]);
+        // @todo need to take form db
         model.addAttribute("budgetedSalesValue", 70);
         model.addAttribute("actualCostValue", monthlyCosts[month]);
+        // @todo need to take form db
         model.addAttribute("budgetedCostValue", 50);
+
+        // array of year budgeted sales and budgeted costs in each individual month
+        int[] monthlyBudgetedSales = new int[] {10, 20, 12, 50, 60, 30, 20, 10, 13, 27, 0, 0};
+        int[] monthlyBudgetedCosts = new int[] {6, 8, 15, 9, 9, 20, 15, 12, 14, 20, 0, 0};
+
+        int totalSales = 0;
+        int totalCosts = 0;
+        int totalBudgetedSales = 0;
+        int totalBudgetedCosts = 0;
+        for (Double salesValue : monthlySales)
+        {
+            totalSales += salesValue;
+        }
+        for (Long costValue : monthlyCosts)
+        {
+            totalCosts += costValue;
+        }
+        for (int budgetedSaleValue : monthlyBudgetedSales)
+        {
+            totalBudgetedSales += budgetedSaleValue;
+        }
+        for (int budgetedCostValue : monthlyBudgetedCosts)
+        {
+            totalBudgetedCosts += budgetedCostValue;
+        }
+        model.addAttribute("monthlySales", monthlySales);
+        model.addAttribute("monthlyCosts", monthlyCosts);
+
+
+        model.addAttribute("totalSales", totalSales);
+        model.addAttribute("totalCosts", totalCosts);
+        model.addAttribute("totalBudgetedSales", totalBudgetedSales);
+        model.addAttribute("totalBudgetedCosts", totalBudgetedCosts);
+
+
         model.addAttribute("monthlySales", monthlySales);
         model.addAttribute("monthlyCosts", monthlyCosts);
        return model;
