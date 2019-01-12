@@ -1,6 +1,6 @@
 package com.salesAnalyst.version1.SalesAnalyst.controllers;
 
-import com.salesAnalyst.version1.SalesAnalyst.serviceFacades.SaleserviceFacade;
+import com.salesAnalyst.version1.SalesAnalyst.serviceFacades.CoustomerAnerlysisFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,8 @@ public class CustomerController {
     @Value("${app.months}")
     private String months;
     @Autowired
-    SaleserviceFacade saleserviceFacade;
+    CoustomerAnerlysisFacade coustomerAnerlysisFacade;
+
 
     @GetMapping(path="/user/customer") // Map ONLY GET Requests with the path /user/customer
     public String handleCustomerViewDisplay(ModelMap model, @RequestParam(value = "custId", required = false) String custId) {
@@ -33,42 +34,17 @@ public class CustomerController {
         if (!model.containsAttribute("username")) {
             return "redirect:/";
         }
-
-        // @todo get the customer list from db and set the 1st customer of the list to selectedCustomer by default
-        ArrayList<String> customerNames = new ArrayList<String>();
-        customerNames.add("Customer 1");
-        customerNames.add("Customer 2");
-        customerNames.add("Customer 3");
-        customerNames.add("Customer 4");
-        ArrayList<String> customerIds = new ArrayList<String>();
-        customerIds.add("111");
-        customerIds.add("222");
-        customerIds.add("333");
-        customerIds.add("444");
-
-        String selectedCustomer = customerNames.get(0);
-
-        if (custId != null) {
-            selectedCustomer = customerNames.get(customerIds.indexOf(custId));
-        }
-
         // current year for customers timezone needs to be obtained
         java.util.TimeZone tz = java.util.TimeZone.getTimeZone(timezone);
         java.util.Calendar c = java.util.Calendar.getInstance(tz);
 
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
 
-        // @todo: Take this from db
-        // customer details
-        model.addAttribute("customerName", "TGIF Colombo");
-        model.addAttribute("customerBusiness", "Restaurant Management");
-        model.addAttribute("customerAddress", "555A, Canal Row, Colombo 01");
-        model.addAttribute("customerNames", customerNames);
-        model.addAttribute("customerIds", customerIds);
-        model.addAttribute("selectedCustomer", selectedCustomer);
+        model=coustomerAnerlysisFacade.getCoustomerList(model,custId);
+        model= coustomerAnerlysisFacade.getSalesService(model);
         model.addAttribute("monthValues", monthValues);
 
-        model=saleserviceFacade.getSalesService(model);
+
         return "customer";
     }
 
@@ -88,10 +64,7 @@ public class CustomerController {
         if (!model.containsAttribute("username")) {
             return "redirect:/";
         }
-
-        // @todo: Add new customer to customer table
-        // @todo: Verify how the custAddress is added (with or without new lines)
-
+        coustomerAnerlysisFacade.addCoustomer(custName,custBusiness,custAddress);
         return "redirect:/user/dashboard";
     }
 }

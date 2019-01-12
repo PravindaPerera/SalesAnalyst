@@ -74,15 +74,4 @@ public class SalesService {
     }
 
 
-    public Long[]getCOstByMonth(int year){
-        List<Long> cost=salesRepository.findCostByYear(year);
-        Long[] integerArray=new Long[cost.size()];
-        int i=0;
-        for (Long saleValue : cost){
-            integerArray[i]=saleValue;
-            i++;
-        }
-
-        return  integerArray;
-    }
 }

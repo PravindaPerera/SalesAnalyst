@@ -2,7 +2,7 @@ package com.salesAnalyst.version1.SalesAnalyst.controllers;
 
 import com.salesAnalyst.version1.SalesAnalyst.entities.Users;
 import com.salesAnalyst.version1.SalesAnalyst.repositories.UsersRepository;
-import com.salesAnalyst.version1.SalesAnalyst.serviceFacades.SaleserviceFacade;
+import com.salesAnalyst.version1.SalesAnalyst.serviceFacades.CoustomerAnerlysisFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,15 +18,16 @@ import java.util.Calendar;
 public class LoginController {
     @Autowired // This means to inject the bean called userRepository
     private UsersRepository userRepository;
-@Autowired
-private SaleserviceFacade saleserviceFacade;
+    @Autowired
+    private CoustomerAnerlysisFacade coustomerAnerlysisFacade;
     @Value("${app.timezone}")
     private String timezone;
     @Value("${app.months}")
     private String months;
 
     @PostMapping(path="/login") // Map ONLY POST Requests with the path /login
-    public String handleUserLogin(RedirectAttributes redirectAttributes, @RequestParam String username,
+    public String handleUserLogin(RedirectAttributes redirectAttributes,
+                                  @RequestParam String username,
                                   @RequestParam String password) {
 
         Users user  = userRepository.findByUsernameAndPassword(username, password);
@@ -109,7 +110,7 @@ private SaleserviceFacade saleserviceFacade;
         model.addAttribute("totalCosts", totalCosts);
         model.addAttribute("totalBudgetedSales", totalBudgetedSales);
         model.addAttribute("totalBudgetedCosts", totalBudgetedCosts);
-        model=saleserviceFacade.getDashBoardModel(model,c.get(Calendar.YEAR),c.get(Calendar.MONTH));
+        model= coustomerAnerlysisFacade.getDashBoardModel(model,c.get(Calendar.YEAR),c.get(Calendar.MONTH));
         return "dashboard";
     }
 
