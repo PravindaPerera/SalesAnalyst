@@ -1,6 +1,6 @@
 package com.salesAnalyst.version1.SalesAnalyst.entities;
 
-import com.sun.javafx.beans.IDProperty;
+
 
 import javax.persistence.*;
 

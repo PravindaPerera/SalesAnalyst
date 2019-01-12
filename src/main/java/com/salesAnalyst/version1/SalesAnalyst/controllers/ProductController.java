@@ -1,5 +1,7 @@
 package com.salesAnalyst.version1.SalesAnalyst.controllers;
 
+import com.salesAnalyst.version1.SalesAnalyst.serviceFacades.ProductServiceFacade;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +16,8 @@ import java.util.Calendar;
 @Controller
 @SessionAttributes("username")
 public class ProductController {
-
+    @Autowired
+    ProductServiceFacade productServiceFacade;
     @Value("${app.timezone}")
     private String timezone;
 
@@ -51,34 +54,15 @@ public class ProductController {
         // current year for customers timezone needs to be obtained
         java.util.TimeZone tz = java.util.TimeZone.getTimeZone(timezone);
         java.util.Calendar c = java.util.Calendar.getInstance(tz);
-
+        model=productServiceFacade.getProductInfo(model,prodId);
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
-
-        // product details
-        model.addAttribute("productName", "Product A");
-
-        // @todo: Take this from db
-        // array of company total sales each month
-        int[] totalMonthlySales = new int[] {500, 400, 325, 190, 180, 800, 600, 500, 630, 470, 0, 0};
-        // array of monthly sales of the focused product
-        int[] monthlyProductSales = new int[] {100, 200, 125, 70, 80, 300, 200, 100, 130, 270, 0, 0};
-        // array containing monthly product sales proportionality to total monthly sales
-        double[] salesPropotion = new double[12];
-        for (int i=0; i<totalMonthlySales.length; i++) {
-            if (totalMonthlySales[i] == 0) {
-                salesPropotion[i] = 0;
-            } else {
-                salesPropotion[i] = ((double) monthlyProductSales[i]/totalMonthlySales[i]) * 100;
-            }
-        }
-        model.addAttribute("totalMonthlySales", totalMonthlySales);
-        model.addAttribute("monthlyProductSales", monthlyProductSales);
-        model.addAttribute("salesPropotion", salesPropotion);
-        model.addAttribute("monthValues", monthValues);
-        model.addAttribute("notApplicable", "N/A");
         model.addAttribute("productNames", productNames);
+        model.addAttribute("monthValues", monthValues);
         model.addAttribute("productIds", productIds);
         model.addAttribute("selectedProduct", selectedProduct);
+        model.addAttribute("productName", "Product A");
+
+
         return "product";
     }
 

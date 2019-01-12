@@ -35,7 +35,7 @@ public class SaleserviceFacade {
         // array of product sales for the focused customer
         Long[] customerProductSales = salesService.getProductSalesForCOustomer(2017,1);
         // product names of the company
-        String[] productNames = new String[] {"Product1", "Product2", "Product3", "Product4", "Product5", "Product6"};
+        String[] productNames = new String[] {"Product1", "Product2"};
         // colour codes for each product
         String[] colourCodes = new String[] {"#26B99A", "#26B9B9", "#268AB9", "#264CB9", "#5326B9", "#8A26B9"};
 
