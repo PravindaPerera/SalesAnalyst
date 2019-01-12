@@ -64,52 +64,12 @@ private SaleserviceFacade saleserviceFacade;
         java.util.TimeZone tz = java.util.TimeZone.getTimeZone(timezone);
         java.util.Calendar c = java.util.Calendar.getInstance(tz);
 
+        model=saleserviceFacade.getDashBoardModel(model,c.get(Calendar.YEAR),c.get(Calendar.MONTH));
+
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", monthValues[c.get(Calendar.MONTH)]);
-
-        // current months actual and budgeted sales/cost vales need to be displayed
-        model.addAttribute("actualSalesValue", 100);
-        model.addAttribute("budgetedSalesValue", 70);
-        model.addAttribute("actualCostValue", 80);
-        model.addAttribute("budgetedCostValue", 50);
-
-        // array of year sales and costs in each individual month
-        int[] monthlySales = new int[] {100, 200, 125, 70, 80, 300, 200, 100, 130, 270, 0, 0};
-        int[] monthlyCosts = new int[] {60, 80, 150, 90, 90, 200, 150, 120, 140, 200, 0, 0};
-        // array of year budgeted sales and budgeted costs in each individual month
-        int[] monthlyBudgetedSales = new int[] {10, 20, 12, 50, 60, 30, 20, 10, 13, 27, 0, 0};
-        int[] monthlyBudgetedCosts = new int[] {6, 8, 15, 9, 9, 20, 15, 12, 14, 20, 0, 0};
-
-        int totalSales = 0;
-        int totalCosts = 0;
-        int totalBudgetedSales = 0;
-        int totalBudgetedCosts = 0;
-        for (int salesValue : monthlySales)
-        {
-            totalSales += salesValue;
-        }
-        for (int costValue : monthlyCosts)
-        {
-            totalCosts += costValue;
-        }
-        for (int budgetedSaleValue : monthlyBudgetedSales)
-        {
-            totalBudgetedSales += budgetedSaleValue;
-        }
-        for (int budgetedCostValue : monthlyBudgetedCosts)
-        {
-            totalBudgetedCosts += budgetedCostValue;
-        }
-        model.addAttribute("monthlySales", monthlySales);
-        model.addAttribute("monthlyCosts", monthlyCosts);
         model.addAttribute("monthValues", monthValues);
 
-
-        model.addAttribute("totalSales", totalSales);
-        model.addAttribute("totalCosts", totalCosts);
-        model.addAttribute("totalBudgetedSales", totalBudgetedSales);
-        model.addAttribute("totalBudgetedCosts", totalBudgetedCosts);
-        model=saleserviceFacade.getDashBoardModel(model,c.get(Calendar.YEAR),c.get(Calendar.MONTH));
         return "dashboard";
     }
 
@@ -152,44 +112,11 @@ private SaleserviceFacade saleserviceFacade;
         years.add("2016");
         years.add("2015");
 
-        // array of year sales and costs in each individual month
-        int[] monthlySales = new int[] {100, 200, 125, 70, 80, 300, 200, 100, 130, 270, 0, 0};
-        int[] monthlyCosts = new int[] {60, 80, 150, 90, 90, 200, 150, 120, 140, 200, 0, 0};
-        // array of year budgeted sales and budgeted costs in each individual month
-        int[] monthlyBudgetedSales = new int[] {10, 20, 12, 50, 60, 30, 20, 10, 13, 27, 0, 0};
-        int[] monthlyBudgetedCosts = new int[] {6, 8, 15, 9, 9, 20, 15, 12, 14, 20, 0, 0};
+        model=saleserviceFacade.getDashBoardModel(model,Integer.parseInt(selectedYear),c.get(Calendar.MONTH));
 
-        int totalSales = 0;
-        int totalCosts = 0;
-        int totalBudgetedSales = 0;
-        int totalBudgetedCosts = 0;
-        for (int salesValue : monthlySales)
-        {
-            totalSales += salesValue;
-        }
-        for (int costValue : monthlyCosts)
-        {
-            totalCosts += costValue;
-        }
-        for (int budgetedSaleValue : monthlyBudgetedSales)
-        {
-            totalBudgetedSales += budgetedSaleValue;
-        }
-        for (int budgetedCostValue : monthlyBudgetedCosts)
-        {
-            totalBudgetedCosts += budgetedCostValue;
-        }
-        model.addAttribute("monthlySales", monthlySales);
-        model.addAttribute("monthlyCosts", monthlyCosts);
         model.addAttribute("monthValues", monthValues);
-
         model.addAttribute("years", years);
         model.addAttribute("selectedYear", selectedYear);
-
-        model.addAttribute("totalSales", totalSales);
-        model.addAttribute("totalCosts", totalCosts);
-        model.addAttribute("totalBudgetedSales", totalBudgetedSales);
-        model.addAttribute("totalBudgetedCosts", totalBudgetedCosts);
         return "history";
     }
 }

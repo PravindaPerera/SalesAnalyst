@@ -12,7 +12,7 @@ public class ProductServiceFacade {
     public ModelMap getProductInfo(ModelMap model,String productId) {
 
 
-        Long[] totalMonthlySales = salesService.getSaleValues(2017);
+        Double[] totalMonthlySales = salesService.getSaleValues(2017);
         Long[] monthlyProductSales = salesService.getSalesByProduct(2017,"1");
         // array containing monthly product sales proportionality to total monthly sales
         double[] salesPropotion = new double[12];
