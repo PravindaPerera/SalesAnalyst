@@ -34,32 +34,14 @@ public class ProductController {
         }
 
         // @todo get the product list from db and set the 1st product of the list to selectedProduct by default
-        ArrayList<String> productNames = new ArrayList<String>();
-        productNames.add("Product 1");
-        productNames.add("Product 2");
-        productNames.add("Product 3");
-        productNames.add("Product 4");
-        ArrayList<String> productIds = new ArrayList<String>();
-        productIds.add("111");
-        productIds.add("222");
-        productIds.add("333");
-        productIds.add("444");
-
-        String selectedProduct = productNames.get(0);
-
-        if (prodId != null) {
-            selectedProduct = productNames.get(productIds.indexOf(prodId));
-        }
+        model=productServiceFacade.getProductsMetaData(model,prodId);
 
         // current year for customers timezone needs to be obtained
         java.util.TimeZone tz = java.util.TimeZone.getTimeZone(timezone);
         java.util.Calendar c = java.util.Calendar.getInstance(tz);
         model=productServiceFacade.getProductInfo(model,prodId);
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
-        model.addAttribute("productNames", productNames);
         model.addAttribute("monthValues", monthValues);
-        model.addAttribute("productIds", productIds);
-        model.addAttribute("selectedProduct", selectedProduct);
         model.addAttribute("productName", "Product A");
 
 
@@ -82,9 +64,7 @@ public class ProductController {
         if (!model.containsAttribute("username")) {
             return "redirect:/";
         }
-
-        // @todo: Add new product to product table
-
+        productServiceFacade.addProduct(prodName);
         return "redirect:/user/dashboard";
     }
 }

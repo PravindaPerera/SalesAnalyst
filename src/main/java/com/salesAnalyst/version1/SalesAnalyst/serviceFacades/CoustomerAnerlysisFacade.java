@@ -1,17 +1,55 @@
 package com.salesAnalyst.version1.SalesAnalyst.serviceFacades;
 
+import com.salesAnalyst.version1.SalesAnalyst.entities.Customer;
+import com.salesAnalyst.version1.SalesAnalyst.services.CostService;
+import com.salesAnalyst.version1.SalesAnalyst.services.CoustomerService;
 import com.salesAnalyst.version1.SalesAnalyst.services.OrganizationService;
 import com.salesAnalyst.version1.SalesAnalyst.services.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
-public class SaleserviceFacade {
+public class CoustomerAnerlysisFacade {
     @Autowired
     OrganizationService organizationService;
     @Autowired
     SalesService salesService;
+    @Autowired
+    CostService costService;
+    @Autowired
+    CoustomerService coustomerService;
+
+    public ModelMap getCoustomerList(ModelMap model,String custId){
+        List<Customer> customerList=coustomerService.getCoustomers();
+        List<String> customerNames =  customerList.
+                stream().
+                map(Customer::getName).
+               collect(Collectors.toList());
+       List<String> customerIds = customerList.
+               stream().
+               map(s->Integer.toString(s.getCustomerId())).
+               collect(Collectors.toList());
+        Customer selectedCustomer = customerList.get(0);
+
+        if (custId != null) {
+             selectedCustomer = customerList.get(customerIds.indexOf(custId));
+        }
+        model.addAttribute("customerNames", customerNames);
+        model.addAttribute("customerIds", customerIds);
+        model.addAttribute("selectedCustomer", selectedCustomer);
+        model.addAttribute("customerName", selectedCustomer.getName());
+        model.addAttribute("customerBusiness", selectedCustomer.getCategory());
+        model.addAttribute("customerAddress", selectedCustomer.getAddress());
+        return model;
+
+    }
+
 
     public ModelMap getSalesService(ModelMap model) {
         model = organizationService.getOrganizationDetails(model);
@@ -57,7 +95,7 @@ public class SaleserviceFacade {
         // sales values for a given year per month
         Double[] monthlySales = salesService.getSaleValues(year);
         // cost values for a given year per month
-        Long[] monthlyCosts=salesService.getCostByMonth(year);
+        Long[] monthlyCosts=costService.getCOstByMonth(year);
         model.addAttribute("actualSalesValue", monthlySales[month]);
         // @todo need to take form db
         model.addAttribute("budgetedSalesValue", 70);
@@ -103,5 +141,11 @@ public class SaleserviceFacade {
         model.addAttribute("monthlyCosts", monthlyCosts);
        return model;
 
+    }
+
+
+
+    public void addCoustomer( String custName,String custBusiness,String custAddress){
+        coustomerService.addCustomer(custName,custBusiness,custAddress);
     }
 }

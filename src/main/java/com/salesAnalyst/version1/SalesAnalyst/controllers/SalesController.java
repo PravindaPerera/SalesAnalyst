@@ -1,5 +1,8 @@
 package com.salesAnalyst.version1.SalesAnalyst.controllers;
 
+import com.salesAnalyst.version1.SalesAnalyst.serviceFacades.CoustomerAnerlysisFacade;
+import com.salesAnalyst.version1.SalesAnalyst.serviceFacades.ProductServiceFacade;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,7 +22,10 @@ public class SalesController {
 
     @Value("${app.months}")
     private String months;
-
+@Autowired
+    ProductServiceFacade productServiceFacade;
+@Autowired
+    CoustomerAnerlysisFacade coustomerAnerlysisFacade;
     @GetMapping(path="/user/sales")
     public String handleSalesViewDisplay(ModelMap model) {
 
@@ -28,32 +34,12 @@ public class SalesController {
         }
 
         // @todo get the customer list from db and set the 1st customer of the list to selectedCustomer by default
-        ArrayList<String> customerNames = new ArrayList<String>();
-        customerNames.add("Customer 1");
-        customerNames.add("Customer 2");
-        customerNames.add("Customer 3");
-        customerNames.add("Customer 4");
-        ArrayList<String> customerIds = new ArrayList<String>();
-        customerIds.add("111");
-        customerIds.add("222");
-        customerIds.add("333");
-        customerIds.add("444");
+       model=productServiceFacade.getProductInfo(model,null);
+        model=coustomerAnerlysisFacade.getCoustomerList(model,null);
 
-        ArrayList<String> productNames = new ArrayList<String>();
-        productNames.add("Product 1");
-        productNames.add("Product 2");
-        productNames.add("Product 3");
-        productNames.add("Product 4");
-        ArrayList<String> productIds = new ArrayList<String>();
-        productIds.add("111");
-        productIds.add("222");
-        productIds.add("333");
-        productIds.add("444");
 
-        model.addAttribute("productNames", productNames);
-        model.addAttribute("productIds", productIds);
-        model.addAttribute("customerNames", customerNames);
-        model.addAttribute("customerIds", customerIds);
+
+
 
         return "sales";
     }

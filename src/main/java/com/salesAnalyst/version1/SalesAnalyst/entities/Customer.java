@@ -16,6 +16,31 @@ public class Customer {
     @Column(name = "contactNumber")
     private String contactNumber;
 
+
+    @Basic
+    @Column(name = "address")
+    private String address;
+
+    @Basic
+    @Column(name = "category")
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public int getCustomerId() {
         return customerId;
     }

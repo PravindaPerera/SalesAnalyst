@@ -29,18 +29,9 @@ public class Sales {
     @Column(name="customer")
     private int customer;
 
-    @Basic
-    @Column(name="cost")
-    private int cost;
 
 
-    public int getCost() {
-        return cost;
-    }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
 
     public void setYear(int year) {
         this.year = year;
