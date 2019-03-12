@@ -103,6 +103,7 @@ public class CoustomerAnerlysisFacade {
         // @todo need to take form db
         model.addAttribute("budgetedCostValue", 50);
 
+        // @todo need to take form db
         // array of year budgeted sales and budgeted costs in each individual month
         int[] monthlyBudgetedSales = new int[] {10, 20, 12, 50, 60, 30, 20, 10, 13, 27, 0, 0};
         int[] monthlyBudgetedCosts = new int[] {6, 8, 15, 9, 9, 20, 15, 12, 14, 20, 0, 0};
